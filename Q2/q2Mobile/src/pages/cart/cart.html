@@ -15,24 +15,32 @@
 
 <ion-content padding>
   <ion-row>
-    <ion-col>ชื่อสินค้า</ion-col>
-    <ion-col>จำนวน</ion-col>
-    <ion-col>ราคาต่อชิ้น</ion-col>
-    <ion-col>ราคารวม</ion-col>
+    <ion-col text-center>#</ion-col>
+    <ion-col text-center>ชื่อสินค้า</ion-col>
+    <ion-col text-center>จำนวน</ion-col>
+    <ion-col text-center>ราคาต่อชิ้น</ion-col>
+    <ion-col text-center>ราคารวม</ion-col>
 
   </ion-row>
   <ion-list>
     <ion-item *ngFor="let item of cart">
       <ion-row>
-        <ion-col>
+        <ion-col text-center>
+          {{item.id}}
+        </ion-col>
+        <ion-col text-center>
           {{ item.name }}
         </ion-col>
-        <ion-col>{{ item.numberOf }} </ion-col>
-        <ion-col>{{ item.price }} บาท</ion-col>
-        <ion-col>{{ item.balance }} บาท</ion-col>
+        <ion-col text-center>{{ item.numberOf }} </ion-col>
+        <ion-col text-center>{{ item.price }} บาท</ion-col>
+        <ion-col text-center>{{ item.balance }} บาท</ion-col>
       </ion-row>
     </ion-item>
   </ion-list>
+
+  <ion-label>ราคารวมสิ้นค้าก่อนหักส่วนลด : {{sumOfPrice}} </ion-label>
+  <ion-label>ค่าส่วนลดที่ได้รับ : {{sumDiscount}}  </ion-label>
+  <ion-label>ราคาสิ้นค้าที่ต้องชำระ : {{amount}}  </ion-label>
 
   <button ion-button full (click)="back()">Back</button>
 </ion-content>

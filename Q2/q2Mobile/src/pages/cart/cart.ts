@@ -17,6 +17,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CartPage {
   cart: Carts[];
+  sumOfPrice: any;
+  sumDiscount: any;
+  amount: any;
 
   constructor(public navCtrl: NavController, private http: HttpClient, public navParams: NavParams) {
   }
@@ -30,6 +33,21 @@ export class CartPage {
 
       }
     )
+
+    this.http.get(GlobalVarible.host + "/api/POS/SumPrice").subscribe(
+      (data) => {
+        this.sumOfPrice = JSON.stringify(data);
+        console.log(this.sumOfPrice);
+      }
+    )
+
+    this.http.get(GlobalVarible.host + "/api/POS/SumOfDiscount").subscribe(
+      (data) => {
+        this.sumDiscount = JSON.stringify(data);
+        console.log(this.sumOfPrice);
+      }
+    )
+    this.amount = this.sumOfPrice - this.sumDiscount;
   }
 
   ionViewDidLoad() {

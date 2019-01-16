@@ -17,11 +17,11 @@ namespace q2Api.Controllers
             new Products{Id = 1, Name = "ลูกอม", Price = 5},
             new Products{Id = 2, Name = "เลย์", Price = 20},
             new Products{Id = 3, Name = "แฮม", Price = 50},
-
         };
 
         public static List<Cart> cart = new List<Cart>
         {
+            new Cart{Id = 1, Name = "ลูกอม", NumberOf = 3, Price = 5, Balance = 15},
         };
 
         [HttpGet("[action]")]
@@ -47,10 +47,37 @@ namespace q2Api.Controllers
         [HttpPost("[action]")]
         public void AddProductToCart([FromBody]Cart model)
         {
-            var id = products.Max(it => it.Id) + 1;
+            var id = cart.Max(it => it.Id) + 1;
             model.Id = id;
             model.Balance = model.NumberOf * model.Price;
             cart.Add(model);
+        }
+
+        [HttpGet("[action]")]
+        public double SumPrice()
+        {
+            var result = 0.0;
+            var select = cart.Select(it => it.Balance).ToList();
+            foreach (var item in select)
+            {
+                result += item;
+            }
+
+            return result;
+        }
+
+        [HttpGet("[action]")]
+        public double SumOfDiscount()
+        {
+            var carts = cart.ToList();
+            var sumDiscount = 0.0;
+            foreach (var item in carts)
+            {
+                var discount = item.NumberOf / 3;
+                sumDiscount += discount * item.Price;
+            }
+
+            return sumDiscount;
         }
     }
 }

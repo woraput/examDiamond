@@ -7,24 +7,28 @@
 <ion-content padding>
   <h2>หน้าแสดงสินค้า</h2>
   <ion-row>
-    <ion-col>ชื่อสินค้า</ion-col>
-    <ion-col>ราคาต่อชิ้น</ion-col>
-    <ion-col>จำนวน</ion-col>
-    <ion-col></ion-col>
+    <ion-col text-center>  #</ion-col>
+    <ion-col text-center>ชื่อสินค้า</ion-col>
+    <ion-col text-center>ราคาต่อชิ้น</ion-col>
+    <ion-col text-center>จำนวน</ion-col>
+    <ion-col text-center></ion-col>
   </ion-row>
 
   <ion-item *ngFor="let item of products">
     <ion-row>
-      <ion-col>
+      <ion-col text-center>
+        {{item.id}}
+      </ion-col>
+      <ion-col text-center>
         {{ item.name }}
       </ion-col>
-      <ion-col>{{ item.price }} บาท</ion-col>
-      <ion-col>
+      <ion-col text-center>{{ item.price }} บาท</ion-col>
+      <ion-col text-center>
         <ion-item>
           <ion-input type="number" [(ngModel)]="cart.numberOf"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col>
+      <ion-col text-center>
         <button ion-button full (click)="addToCart(item.name,item.price)">add</button>
       </ion-col>
     </ion-row>
