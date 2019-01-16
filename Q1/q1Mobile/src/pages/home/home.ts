@@ -10,5 +10,8 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
-
+  
+  goCalculate(){
+    this.navCtrl.push("CalculatePage");
+  }
 }
