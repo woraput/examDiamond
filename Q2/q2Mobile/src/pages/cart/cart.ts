@@ -36,18 +36,25 @@ export class CartPage {
 
     this.http.get(GlobalVarible.host + "/api/POS/SumPrice").subscribe(
       (data) => {
+        if (data != null) {
         this.sumOfPrice = JSON.stringify(data);
         console.log(this.sumOfPrice);
+        }
+        else console.error();
       }
     )
 
     this.http.get(GlobalVarible.host + "/api/POS/SumOfDiscount").subscribe(
       (data) => {
-        this.sumDiscount = JSON.stringify(data);
-        console.log(this.sumOfPrice);
+        if (data != null) {
+          this.sumDiscount = JSON.stringify(data);
+          console.log(this.sumOfPrice);
+          this.amount = this.sumOfPrice - this.sumDiscount;
+        }
+        else console.error();
+        
       }
     )
-    this.amount = this.sumOfPrice - this.sumDiscount;
   }
 
   ionViewDidLoad() {
