@@ -20,16 +20,14 @@ namespace q2Api.Controllers
 
         };
 
-
         [HttpGet]
         public ActionResult<IEnumerable<Products>> Get()
         {
             return products.ToList();
         }
 
-    
         [HttpPost]
-        public void Post(Products model)
+        public void Post([FromBody]Products model)
         {
             var id = products.Max(it => it.Id) + 1;
             model.Id = id;
