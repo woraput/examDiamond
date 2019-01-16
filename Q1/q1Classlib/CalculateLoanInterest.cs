@@ -10,13 +10,18 @@ namespace q1Classlib
         public List<LoanInterest> loanInterest = new List<LoanInterest> { };
         public List<LoanInterest> CalculateInterestPerYear(LoanInterest model)
         {
+            var interest = 0.0;
+            var totalBalance = 0.0;
+            var listBalance = new List<double>();
+
             for (int i = 0; i < model.Year; i++)
             {
-                model.Interest = (model.Balance * model.InterestRate) / 100;
+                interest = (model.Balance * model.InterestRate) / 100;
                 model.TotalBalance = model.Balance + model.Interest;
-            }
                 loanInterest.Add(model);
+            }
 
+            var result = listBalance.ToArray();
             return loanInterest;
         }
     }
