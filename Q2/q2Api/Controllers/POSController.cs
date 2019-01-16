@@ -9,8 +9,8 @@ using q2Api.Models;
 namespace q2Api.Controllers
 {
     [Route("api/[controller]")]
-
-    public class POSController : Controller
+    [ApiController]
+    public class POSController : ControllerBase
     {
 
         public static List<Products> products = new List<Products>{
@@ -20,18 +20,37 @@ namespace q2Api.Controllers
 
         };
 
-        [HttpGet]
+        public static List<Cart> cart = new List<Cart>
+        {
+        };
+
+        [HttpGet("[action]")]
         public ActionResult<IEnumerable<Products>> Get()
         {
             return products.ToList();
         }
 
-        [HttpPost]
-        public void Post([FromBody]Products model)
+        [HttpGet("[action]")]
+        public ActionResult<IEnumerable<Cart>> GetCart()
+        {
+            return cart.ToList();
+        }
+
+        [HttpPost("[action]")]
+        public void AddProduct([FromBody]Products model)
         {
             var id = products.Max(it => it.Id) + 1;
             model.Id = id;
             products.Add(model);
-        }  
+        }
+
+        [HttpPost("[action]")]
+        public void AddProductToCart([FromBody]Cart model)
+        {
+            var id = products.Max(it => it.Id) + 1;
+            model.Id = id;
+            model.Balance = model.NumberOf * model.Price;
+            cart.Add(model);
+        }
     }
 }

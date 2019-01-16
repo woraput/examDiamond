@@ -6,6 +6,13 @@ export class Products {
     price: number
 }
 
+export class Carts {
+    id: number
+    name: string
+    price: number
+    numberOf: number
+    balance:number
+}
 // export class Winner {
 //     gamblers: Gambler[]
 //     theNumber: number

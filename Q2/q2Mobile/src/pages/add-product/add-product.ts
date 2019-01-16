@@ -28,7 +28,7 @@ export class AddProductPage {
     console.log(this.products.name);
     console.log(this.products.price);
 
-    this.http.post(GlobalVarible.host + "/api/POS", this.products).subscribe(
+    this.http.post(GlobalVarible.host + "/api/POS/AddProduct", this.products).subscribe(
       (success) => {
         console.log("send", this.products);
 
