@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Calculator Loan interest</ion-title>
+    <ion-title>Calculator Loan Interest</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,8 +8,8 @@
   <h2 text-center align-items-center>กำหนดอัตราดอกเบี้ย(ร้อยละ %)</h2>
   <ion-item>
     <ion-label></ion-label>
-    <ion-input text-center align-items-center type="number" placeholder="กรุณากรอกจำนวน"></ion-input>
+    <ion-input text-center align-items-center  type="number" placeholder="กรุณากรอกจำนวน" [(ngModel)]="numOfInterest"></ion-input>
   </ion-item>
-  <button  (click)="goCalculate()" ion-button full >Submit</button>
- 
+  <button (click)="goCalculate()" ion-button full>Submit</button>
+
 </ion-content>

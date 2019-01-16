@@ -56,7 +56,7 @@ namespace q1Api
                           builder.WithOrigins("*")
                           .AllowAnyMethod()
                           .AllowAnyHeader()
-                      );
+            );
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

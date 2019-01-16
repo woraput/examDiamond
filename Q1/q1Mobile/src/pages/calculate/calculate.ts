@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the CalculatePage page.
@@ -14,15 +15,37 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'calculate.html',
 })
 export class CalculatePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private numOfInterest: number;
+  private year: number;
+  private balance: number;
+  private result: any;
+  constructor(public navCtrl: NavController, private http: HttpClient, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalculatePage');
+    this.numOfInterest = this.navParams.data;
+    console.log("num", this.numOfInterest);
   }
 
-  back(){
+  calculate() {
+    console.log(this.year);
+    console.log(this.balance);
+
+    this.http.get("https://localhost:5001/api/Calculate/" + this.balance + '/' + this.numOfInterest + '/' + this.year).subscribe(
+      (data) => {
+        // alert(JSON.stringify(data));
+        console.log(data);
+        this.result = data;
+        console.log(this.result);
+
+
+      }
+    )
+  }
+
+  back() {
     this.navCtrl.popToRoot();
   }
+
 }
