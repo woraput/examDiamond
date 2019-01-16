@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using q1Api.Models;
 using q1Classlib;
+using q1Classlib.Models;
 
 namespace q1Api.Controllers
 {
@@ -13,12 +14,35 @@ namespace q1Api.Controllers
 
     public class CalculateController : Controller
     {
-        [HttpGet("{balance}/{interestRate}/{year}")]
-        public double[] Calculator(double balance, int interestRate, int year)
+        public static List<LoanInterest> loanInterest = new List<LoanInterest> { };
+
+        [HttpPost]
+        public void Post(LoanInterest model)
         {
-            var q1 = new CalculateLoanInterest();
-            var result = q1.CalculateInterestPerYear(balance, interestRate, year);
-            return result;
+            var year = model.Year;
+            var listBalance = new List<LoanInterest>();
+            for (int i = 1; i <= year; i++)
+            {
+                model.Interest = model.Balance * model.InterestRate / 100;
+                model.TotalBalance = model.Balance + model.Interest;
+                model.Year = i;
+                loanInterest.Add(new LoanInterest()
+                {
+                    InterestRate = model.InterestRate,
+                    Balance = model.Balance,
+                    Year = model.Year,
+                    Interest = model.Interest,
+                    TotalBalance = model.TotalBalance,
+                });
+                model.Balance = model.TotalBalance;
+            }
+        }
+
+        [HttpGet]
+        public List<LoanInterest> Get()
+        {
+            return loanInterest.ToList();
+
         }
     }
 }

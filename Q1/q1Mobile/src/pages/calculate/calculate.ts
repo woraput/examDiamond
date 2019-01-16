@@ -1,3 +1,4 @@
+import { LoanInterest, GlobalVarible } from './../../app/models';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
@@ -15,31 +16,31 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: 'calculate.html',
 })
 export class CalculatePage {
-  private numOfInterest: number;
-  private year: number;
-  private balance: number;
+  loanInterest: LoanInterest = new LoanInterest;
   private result: any;
   constructor(public navCtrl: NavController, private http: HttpClient, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalculatePage');
-    this.numOfInterest = this.navParams.data;
-    console.log("num", this.numOfInterest);
+    this.loanInterest.interestRate = this.navParams.data;
+    console.log("num", this.loanInterest.interestRate);
   }
 
   calculate() {
-    console.log(this.year);
-    console.log(this.balance);
+    console.log(this.loanInterest.balance);
+    console.log(this.loanInterest.year);
 
-    this.http.get("https://localhost:5001/api/Calculate/" + this.balance + '/' + this.numOfInterest + '/' + this.year).subscribe(
+    this.http.post(GlobalVarible.host + "/api/Calculate/", this.loanInterest).subscribe(
       (data) => {
-        // alert(JSON.stringify(data));
-        console.log(data);
-        this.result = data;
-        console.log(this.result);
-
-
+        this.http.get(GlobalVarible.host + "/api/Calculate/").subscribe(
+          (data) => {
+            // alert(JSON.stringify(data));
+            console.log(data);
+            this.result = data;
+            console.log(this.result);
+          }
+        )
       }
     )
   }

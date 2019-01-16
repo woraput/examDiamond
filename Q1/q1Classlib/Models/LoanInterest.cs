@@ -6,5 +6,7 @@ namespace q1Classlib.Models
         public double Balance { get; set; }
         public int Year { get; set; }
         public double Interest { get; set; }
+
+        public double TotalBalance { get; set; }
     }
 }

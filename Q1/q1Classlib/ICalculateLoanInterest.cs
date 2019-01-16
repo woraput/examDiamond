@@ -1,7 +1,8 @@
 
 using System.Collections.Generic;
+using q1Classlib.Models;
 
 public interface ICalculateLoanInterest
 {
-    double[] CalculateInterestPerYear(double balance, int interestRate, int year);
+    List<LoanInterest> CalculateInterestPerYear(LoanInterest model);
 }
